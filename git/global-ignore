@@ -1,0 +1,11 @@
+### macOS ###
+.DS_Store
+
+### IntelliJ ###
+.idea
+*.iml
+
+### SDKMAN! ###
+.sdkmanrc
+
+.vscode/

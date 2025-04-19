@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+set -e
+
+CONFIG="install.conf.yaml"
+EXTRA="install.extra.conf.yaml"
+DOTBOT_DIR="dotbot"
+
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "${BASEDIR}"
+git submodule sync --quiet --recursive
+git submodule update --init --recursive
+
+install_from() {
+  local config_file=$1
+  shift 1
+
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+    --base-directory "${BASEDIR}" \
+    --config-file "$config_file" \
+    --plugin-dir plugins/dotbot-if \
+    "${@}"
+}
+
+export INSTALLING_DOTFILES=1
+
+install_from "${CONFIG}" --exit-on-failure "${@}" &&
+  install_from "${EXTRA}" "${@}"

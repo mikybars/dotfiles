@@ -1,0 +1,32 @@
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+git:
+  # https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --syntax-theme base16-256 -s
+    externalDiffCommand: difft --color=always
+
+# https://github.com/jesseduffield/lazygit/issues/3064#issue-1938460094
+os:
+  openLink: open "$(echo "{{link}}" | sed 's/%2F/\//g')"
+
+gui:
+  nerdFontsVersion: '3'
+  enlargedSideViewLocation: top
+  animateExplosion: true
+
+customCommands:
+  - context: 'global'
+    key: 'E'
+    description: 'Empty Commit with Message'
+    command: 'git commit --allow-empty -m "{{index .PromptResponses 0}}"'
+    prompts:
+      - type: input
+        title: 'Enter empty commit message'
+        initialValue: ''
+  # https://github.com/jesseduffield/lazygit/issues/1896#issuecomment-1154908826
+  - key: 'F'
+    command: 'git fetch --prune'
+    context: 'localBranches'
+    stream: true

@@ -1,0 +1,51 @@
+- defaults:
+    if:
+      stdout: false
+      stderr: false
+    shell:
+      stdin: true
+      stdout: true
+      stderr: true
+      quiet: true
+    link:
+      relink: true
+      create: true
+
+- clean: ['~']
+
+- create:
+    - ~/.config/
+    - ~/.cache/
+    - ~/.local/share/
+    - ~/.local/state/
+    - ~/dev/mikybars/
+    - ~/dev/work/
+- create:
+    ~/.ssh:
+      mode: 0700
+
+- link:
+    ~/.zshenv: zsh/zshenv
+    ~/.config/zsh/.zshenv: zsh/zshenv
+    ~/.config/zsh/.zshrc: zsh/config
+    ~/.config/zsh/set-path.zsh: zsh/set-path.zsh
+    ~/.docker/config.json: docker/config.json
+    ~/.config/ripgrep/config: ripgrep/config
+    ~/.config/lazygit/config.yml: lazygit/config.yml
+    ~/.config/git/config: git/config
+    ~/.config/git/ignore: git/global-ignore
+    ~/.config/nvim: nvim
+
+- if:
+    not: ['brew is installed', 'command -v brew']
+    then:
+      - shell:
+          - description: 🍻 Installing Homebrew
+            # https://github.com/orgs/Homebrew/discussions/4311#discussioncomment-5239736
+            command: >
+              sudo echo &&
+              NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+- shell:
+    - description: 📦 Installing brew packages from Brewfile
+      command: brew bundle install --verbose --file Brewfile

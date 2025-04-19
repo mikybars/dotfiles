@@ -1,0 +1,12 @@
+# https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+
+# Because who cares about case!?
+--smart-case
+
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=120
+--max-columns-preview
+
+# Using glob patterns to include/exclude files or folders
+--glob
+!venv

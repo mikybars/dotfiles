@@ -1,0 +1,48 @@
+# vi: ft=zsh
+
+# .zshrc: Only sourced for interactive shells (i.e. [[ $- == *i* ]])
+
+# https://0xmachos.com/2021-05-13-zsh-path-macos/
+[[ -r "${ZDOTDIR}/set-path.zsh" ]] && source "${ZDOTDIR}/set-path.zsh"
+
+export EDITOR='nvim'
+alias ..='cd ..'
+
+# Zoxide
+
+# https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation
+eval "$(zoxide init --cmd j zsh)"
+
+# ripgrep / tag
+
+# https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgrep/config
+alias rgni='rg --no-ignore'
+
+# https://github.com/aykamko/tag?tab=readme-ov-file#configuration
+if (( $+commands[tag] )); then
+  export TAG_CMD_FMT_STRING="${EDITOR} -c \"call cursor({{.LineNumber}}, {{.ColumnNumber}})\" {{.Filename}}"
+  export TAG_SEARCH_PROG=rg
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
+  alias rg=tag
+fi
+
+# Gradle
+
+alias gw=.'/gradlew'
+
+# nnn
+
+alias l='nnn -e'
+
+# Lazygit
+
+alias lg='lazygit'
+
+# Git
+
+alias g..='cd $(git rev-parse --show-toplevel)'
+alias gP='git push'
+alias gPf='git push --force-with-lease'
+alias gcane='git commit --amend --no-edit'
+alias gp='git pull'

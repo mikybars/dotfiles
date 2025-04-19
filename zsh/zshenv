@@ -1,0 +1,23 @@
+# vi: ft=zsh
+
+# .zshenv: Always sourced
+
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+
+# Homebrew
+
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
+
+# https://youtrack.jetbrains.com/issue/IDEA-334183/Gradle-cannot-access-Environmental-Variables
+# export GRADLE_USER_HOME="${XDG_CACHE_HOME}/gradle"
+
+# https://github.com/docker/for-mac/issues/6150
+# export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
+[[ -v INSTALLING_DOTFILES ]] && source "${ZDOTDIR}/set-path.zsh"

@@ -1,0 +1,45 @@
+- defaults:
+    if:
+      stdout: false
+      stderr: false
+    shell:
+      stdin: true
+      stdout: true
+      stderr: true
+      quiet: true
+
+- shell:
+    - description:  Applying macOS defaults
+      command: . macos/defaults.sh
+
+- if:
+    not: ['LazyVim is installed', '[[ -d ~/.local/share/nvim/lazy ]]']
+    then:
+      - shell:
+          - description: Installing LazyVim
+            # https://github.com/LazyVim/LazyVim/discussions/3679#discussioncomment-9853206
+            command: nvim --headless '+Lazy! install' +MasonInstallAll +qall
+
+- shell:
+    - description: Setting up git users
+      command: >
+        gum confirm --timeout=3s --default=$([[ -f ~/.config/git/include-if.config ]] && echo "no" || echo "yes") &&
+        . git/edit-include-if.sh || true
+
+- if:
+    not: ['GitHub is connected', 'gh auth status']
+    then:
+      - shell:
+          - description: Setting up GitHub connection
+            command: >
+              gum confirm --timeout=3s &&
+              . github/connect.sh || true
+
+- if:
+    not: ['Java is installed', 'grep installed <(sdk list java)']
+    then:
+      - shell:
+          - description: ☕ Installing latest version of Java
+            command: >
+              gum confirm --timeout=3s &&
+                sdk install java || true

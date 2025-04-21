@@ -21,6 +21,7 @@ brew "openssl"
 brew "ripgrep"                             # https://github.com/BurntSushi/ripgrep
 brew "ruby"
 brew "sdkman/tap/sdkman-cli"               # https://sdkman.io/
+brew "yazi"                                # https://github.com/sxyazi/yazi
 brew "zoxide"                              # https://github.com/ajeetdsouza/zoxide.git
 brew "zsh"
 brew "mikybars/tap/nnn"                    # https://github.com/jarun/nnn

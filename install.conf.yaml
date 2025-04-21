@@ -35,6 +35,7 @@
     ~/.config/git/config: git/config
     ~/.config/git/ignore: git/global-ignore
     ~/.config/nvim: nvim
+    ~/.config/yazi: yazi
 
 - if:
     not: ['brew is installed', 'command -v brew']

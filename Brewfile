@@ -31,6 +31,7 @@ cask "bartender"                           # https://www.macbartender.com/
 cask "betterdisplay"                       # https://github.com/waydabber/BetterDisplay
 cask "bettertouchtool"                     # https://folivora.ai
 cask "notion"                              # https://www.notion.so/es-es/desktop
+cask "orbstack"                            # https://orbstack.dev/
 cask "postman"                             # https://www.postman.com/
 cask "raycast"                             # https://www.raycast.com/
 cask "warp"                                # https://www.warp.dev/
@@ -38,4 +39,3 @@ cask "zen-browser"
 cask "mikybars/tap/font-cascadia-code-nf"  # https://nerdfonts.com
 # require sudo
 cask "adobe-acrobat-reader"
-cask "docker"

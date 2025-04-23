@@ -18,7 +18,7 @@
       - shell:
           - description: Installing LazyVim
             # https://github.com/LazyVim/LazyVim/discussions/3679#discussioncomment-9853206
-            command: nvim --headless '+Lazy! install' +MasonInstallAll +qall
+            command: nvim --headless '+Lazy! install' +qall
 
 - shell:
     - description: Setting up git users

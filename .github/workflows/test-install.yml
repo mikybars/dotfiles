@@ -1,0 +1,30 @@
+name: Test install
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - stable
+
+jobs:
+  test-install:
+    name: Run install test
+    runs-on: macos-14 # macOS Sonoma
+
+    steps:
+      - name: Checkout stable branch
+        uses: actions/checkout@v4
+        with:
+          ref: stable
+          fetch-depth: 1
+
+      - name: Run install
+        run: ./install
+
+      - name: Verify tools are present
+        run: |
+          command -v nvim lazygit &&
+          /bin/zsh -i -c '[[ $(which j) = *zoxide* ]]; exit'
+
+      - name: Verify Java LTS is installed
+        run: '[[ $(java -version 2>&1) = *LTS* ]]'
